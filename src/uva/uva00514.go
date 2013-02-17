@@ -29,7 +29,6 @@ func reverseEquals(normal []int, reverse []int, startOffset, reverseOffset int, 
 }
 
 func rails(in *bufio.Reader, trainA []int, trainB []int) int {
-
 	line, _ := in.ReadString('\n');
 	var s scanner.Scanner
 	s.Init(strings.NewReader(line)).Scan()
@@ -37,7 +36,7 @@ func rails(in *bufio.Reader, trainA []int, trainB []int) int {
 
 	if coachNum == 0 {return 0}
 
-	// Initialize a order train from A
+	// Initialize train A with ordered coaches
 	trainA = trainA[:0]
 	for i := 0; i < coachNum; i++ {
 		trainA = append(trainA, i + 1)
@@ -58,15 +57,15 @@ func rails(in *bufio.Reader, trainA []int, trainB []int) int {
 			return coachNum;
 		}
 
-		// Search a identical coach as the disconnect point on train B, and reverse train B to see if order is possible
+		// Search a identical coach as the disconnect point on train A, and reverse train A to see if order is possible
 		possible := true
-		for i := 0; i < len(trainA); i++ {
+		for i := 0; i < len(trainB); i++ {
 			matching := false;
-			for j := i; j < len(trainB); j++ {
-				if trainA[i] == trainB[j] {
+			for j := i; j < len(trainA); j++ {
+				if trainB[i] == trainA[j] {
 					matching = true;
-					if !reverseEquals(trainA, trainB, i, j, j - i) { possible = false; break}
-					i = j + 1;
+					if !reverseEquals(trainB, trainA, i, j, j - i) { possible = false; break}
+					i = j;
 				}
 			}
 			if !possible || !matching { possible = false; break}
@@ -94,9 +93,17 @@ func Main() {
 0
 0
 
+Yes
+No
+
+Yes
+
+
 5
 1 4 3 2 5
 0
 0
+
+YES
 
 */
