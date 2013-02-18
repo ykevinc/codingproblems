@@ -54,7 +54,7 @@ func isValid(x, y, w, h int) bool {
 }
 
 func fillBoggles(board *Board, directions []Direction, requiredPigEwuSize int, dictionary map[string] bool, x, y int, buffer []byte, ifExistThenMark bool) {
-	if !isValid(x, y, board.w, board.h) && board.b[x][y] == true {return}
+	if !isValid(x, y, board.w, board.h) || board.b[x][y] == true {return}
 	board.b[x][y] = true
 	buffer = append(buffer, board.m[x][y])
 	if len(buffer) == requiredPigEwuSize {
