@@ -90,7 +90,7 @@ func boggle(in *bufio.Reader, boardA, boardB *Board, rank int, directions []Dire
 	//for i := 0; i < rank;i++ {fmt.Println(string(boardA.m[i][:]))}
 	//for i := 0; i < rank;i++ {fmt.Println(string(boardB.m[i][:]))}
 
-	// Build the bowels look up maps and the dictionary to hold the PigEwu words
+	// Build the dictionary to hold  PigEwu words
 	dictionary := make(map[string]bool)
 
 	// Find all PigEwu words on board A and fill into dictionary
