@@ -57,7 +57,7 @@ func rails(in *bufio.Reader, trainA []int, trainB []int) int {
 			return coachNum;
 		}
 
-		// Search a identical coach as the disconnect point on train A, and reverse train A to see if order is possible
+		// Search a identical coach for disconnecting train A, and reverse train A to see if order is possible
 		possible := true
 		for i := 0; i < len(trainB); i++ {
 			matching := false;
