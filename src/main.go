@@ -7,10 +7,11 @@
 package main
 
 import (
-	"uva/uva00514"
 	_ "fmt"
+	_ "uva/uva00514"
+	"uva/uva00604"
 )
 
 func main() {
-	uva00514.Main();
+	uva00604.Main();
 }
