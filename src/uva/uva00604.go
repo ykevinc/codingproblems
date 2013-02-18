@@ -90,7 +90,7 @@ func boggle(in *bufio.Reader, boardA, boardB *Board, rank int, directions []Dire
 	//for i := 0; i < rank;i++ {fmt.Println(string(boardA.m[i][:]))}
 	//for i := 0; i < rank;i++ {fmt.Println(string(boardB.m[i][:]))}
 
-	// Build the dictionary to hold  PigEwu words
+	// Build the dictionary to hold PigEwu words
 	dictionary := make(map[string]bool)
 
 	// Find all PigEwu words on board A and fill into dictionary
@@ -109,8 +109,8 @@ func boggle(in *bufio.Reader, boardA, boardB *Board, rank int, directions []Dire
 
 	// Pick the common words in both boards and output an alphabetically-sorted list
 	words := make([]string,0, len(dictionary))
-	for key, value := range dictionary {
-		if value {words = append(words, key)}
+	for word, isCommon := range dictionary {
+		if isCommon {words = append(words, word)}
 	}
 	sort.Strings(words)
 	if len(words) == 0 {
