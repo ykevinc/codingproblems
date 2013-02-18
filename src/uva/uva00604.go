@@ -37,10 +37,11 @@ func NewBoard(rank int) *Board {
 	return &board
 }
 
-func isPigEwu(buffer []byte, vowels map[byte] bool) bool {
+func isPigEwu(buffer []byte) bool {
 	vowelsCount := 0;
 	for _, value := range buffer {
-		if vowels[value] {
+		switch value {
+			case 'A','E','I','O','U','Y':
 			vowelsCount++;
 		}
 	}
@@ -52,12 +53,12 @@ func isValid(x, y, w, h int) bool {
 	return true
 }
 
-func fillBoggles(board *Board, directions []Direction, vowels map[byte] bool, requiredPigEwuSize int, dictionary map[string] bool, x, y int, buffer []byte, ifExistThenMark bool) {
+func fillBoggles(board *Board, directions []Direction, requiredPigEwuSize int, dictionary map[string] bool, x, y int, buffer []byte, ifExistThenMark bool) {
 	if !isValid(x, y, board.w, board.h) && board.b[x][y] == true {return}
 	board.b[x][y] = true
 	buffer = append(buffer, board.m[x][y])
 	if len(buffer) == requiredPigEwuSize {
-		if isPigEwu(buffer, vowels) {
+		if isPigEwu(buffer) {
 			_, exist := dictionary[string(buffer[:])]
 			//  Set value to false to indicate the word is not yet common in both boards
 			if !ifExistThenMark {
@@ -69,7 +70,7 @@ func fillBoggles(board *Board, directions []Direction, vowels map[byte] bool, re
 	}else {
 		// Walk the boggle
 		for i := range directions {
-			fillBoggles(board, directions, vowels, requiredPigEwuSize, dictionary, directions[i].x + x, directions[i].y + y, buffer, ifExistThenMark)
+			fillBoggles(board, directions, requiredPigEwuSize, dictionary, directions[i].x + x, directions[i].y + y, buffer, ifExistThenMark)
 		}
 	}
 	buffer = buffer[0:len(buffer) - 1]
@@ -90,20 +91,19 @@ func boggle(in *bufio.Reader, boardA, boardB *Board, rank int, directions []Dire
 	//for i := 0; i < rank;i++ {fmt.Println(string(boardB.m[i][:]))}
 
 	// Build the bowels look up maps and the dictionary to hold the PigEwu words
-	vowels := map[byte]bool {'A':true, 'E':true, 'I':true, 'O':true, 'U':true, 'Y':true, }
 	dictionary := make(map[string]bool)
 
 	// Find all PigEwu words on board A and fill into dictionary
 	for x := 0 ; x < boardA.w ; x++ {
 		for y := 0 ; y < boardA.h ; y++ {
-			fillBoggles(boardA, directions, vowels, rank, dictionary, x, y, make([]byte,0, rank), false)
+			fillBoggles(boardA, directions, rank, dictionary, x, y, make([]byte,0, rank), false)
 		}
 	}
 
 	// Find all PigEwu words on board B and check if exists in dictionary; possible enhancement: pre-check if the letter in board B start with dictionary's first letters
 	for x := 0 ; x < boardB.w ; x++ {
 		for y := 0 ; y < boardB.h ; y++ {
-			fillBoggles(boardB, directions, vowels, rank, dictionary, x, y, make([]byte,0, rank), true)
+			fillBoggles(boardB, directions, rank, dictionary, x, y, make([]byte,0, rank), true)
 		}
 	}
 
