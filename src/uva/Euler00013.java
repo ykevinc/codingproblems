@@ -125,23 +125,23 @@ class Euler00013
 
       }
     }
-    for (int i = 0;i < ndigits;i++) {
+    for (int i = 0;i < ndigits*ndigits;i++) {
       int sum = sums[i];
       for (int j = 0;j < nnumbers;j++) {
         sum += digit2d[j][i];
       }
+      sums[i] = 0;
       for (int j = 0;sum > 0;j++) {
-        
-        int reminder = sum%10;
+        sums[i+j] += sum%10;
         sum /= 10;
-        sums[i+j] = reminder;
-      }
+      }  
     }
     StringBuilder sb = new StringBuilder(10);
-    for (int i = sums.length-1, j=0;j<firstNdigits&&i >= 0;i--) {
-      if (sums[i] == 0) {
-        continue;
-      }
+    int begin = sums.length-1;
+    while (sums[begin] == 0) {
+      begin--;
+    }
+    for (int i = begin, j=0;j<firstNdigits&&i >= 0;i--) {
       j++;
       sb.append(sums[i]);
     }
