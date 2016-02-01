@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-class Euler00012.java
+class Euler00012
 {
 
   public static void main (String[] args) throws java.lang.Exception
