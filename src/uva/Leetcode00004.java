@@ -19,12 +19,11 @@ public class Leetcode00004 {
                 merged[i++] = nums2[r++];
             }
         }
-        //System.out.println(Arrays.toString(merged));
         if (merged.length % 2 == 0) {
             return (merged[merged.length/2-1] + merged[merged.length/2])/2.0;
         } else {
             return merged[merged.length/2];
         }
     }
-    
+
 }
