@@ -1,4 +1,4 @@
-public class Leetcode00008 {
+public class Leetcode00007 {
     public int reverse(int x) {
         if (x == 0) {
             return 0;
