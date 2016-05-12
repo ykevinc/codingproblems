@@ -1,18 +1,16 @@
 import java.util.*;
 
-public class Leetcode00003 {
+public class Solution {
     public int lengthOfLongestSubstring(String s) {
-        Map<Character,Integer> mapIndexByCharacter = new HashMap<>();
-        int max = 0;
+        Integer mapIndexByCharacter[] = new Integer[128];
+        int max = 0, j = 0;
         for (int i = 0;i < s.length();i++) {
-            Integer index = mapIndexByCharacter.get(s.charAt(i));
+            Integer index = mapIndexByCharacter[s.charAt(i)];
             if (index != null) {
-                i = index;
-                mapIndexByCharacter.clear();
-            } else {
-                mapIndexByCharacter.put(s.charAt(i), i);
-                max = Math.max(max, mapIndexByCharacter.size());
-            }
+                j = Math.max(j, index+1);
+            } 
+            mapIndexByCharacter[s.charAt(i)] = i;
+            max = Math.max(max, i - j + 1);
         }
         return max;
     }
