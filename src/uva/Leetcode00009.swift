@@ -1,4 +1,11 @@
 class Solution {
+    func getTens(p: Int) -> Int {
+        var s = 1
+        for i in 0..<p {
+            s *= 10
+        }
+        return s
+    }
     func isPalindrome(x: Int) -> Bool {
         var l = 0
         if x < 0 {
@@ -11,12 +18,12 @@ class Solution {
         }
         d = abs(x)
         while d > 0 && l > 1 {
-            let r = d - Int(pow(10.0, Double(l - 1)))*(d%10)
+            let tens = getTens(l-1), r = d-tens*(d % 10)
             if r == 0 {
                 return true
             } else if r < 0 {
                 return false
-            } else if r >= Int(pow(10.0, Double(l - 1))) {
+            } else if r >= tens {
                 return false
             }
             d = r / 10
