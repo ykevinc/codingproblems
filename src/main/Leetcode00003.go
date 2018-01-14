@@ -1,11 +1,5 @@
 package main
 
-import "fmt"
-
-func main() {
-	fmt.Println(lengthOfLongestSubstring("pwwkew"))
-}
-
 func lengthOfLongestSubstring(s string) int {
 	if len(s) == 0 {
 		return 0
