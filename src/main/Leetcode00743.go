@@ -13,17 +13,13 @@ func networkDelayTime(times [][]int, N int, K int) int {
 	s = append(s, K)
 	for len(s) > 0 {
 		i, s = s[len(s)-1], s[:len(s)-1]
-
 		v[i] = true
 		edges := graph[i]
-
 		for _, e := range edges {
-			if v, ok := dist[e[0]]; true {
-				if !ok || v > dist[i] + e[1] {
-					dist[e[0]] = dist[i] + e[1]
-				} else {
-					continue
-				}
+			if v, ok := dist[e[0]]; !ok || v > dist[i]+e[1] {
+				dist[e[0]] = dist[i] + e[1]
+			} else {
+				continue
 			}
 			s = append(s, e[0])
 		}
