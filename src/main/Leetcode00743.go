@@ -1,9 +1,5 @@
 package main
 
-import (
-	"fmt"
-)
-
 func networkDelayTime(times [][]int, N int, K int) int {
 	graph := make(map[int][][]int, len(times))
 	for _, time := range times {
@@ -33,7 +29,6 @@ func networkDelayTime(times [][]int, N int, K int) int {
 		}
 	}
 	if len(v) != N {
-		fmt.Println("not reach ", )
 		return -1
 	}
 	max := -1
@@ -42,6 +37,5 @@ func networkDelayTime(times [][]int, N int, K int) int {
 			max = d
 		}
 	}
-	fmt.Println(dist)
 	return max
 }
