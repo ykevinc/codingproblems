@@ -2,7 +2,7 @@ package main
 
 import "testing"
 
-func Test(t *testing.T) {
+func TestDominantIndex(t *testing.T) {
 	tables := []struct {
 		i []int
 		o int
