@@ -91,7 +91,7 @@ func mergeInts(intervals [][]int) [][]int {
 			intervals[i] = intervals[j]
 			intervals[j] = nil
 		}
-		j = i + 1
+		j++
 	}
 	return intervals[0:i]
 }
