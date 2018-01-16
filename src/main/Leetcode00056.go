@@ -47,7 +47,7 @@ func merge(intervals []Interval) []Interval {
 			intervals[i] = intervals[j]
 			deleted[j] = true
 		}
-		j = i + 1
+		j++
 	}
 	return intervals[0:i]
 }
