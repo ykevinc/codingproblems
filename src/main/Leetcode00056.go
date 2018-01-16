@@ -54,7 +54,7 @@ func merge(intervals []Interval) []Interval {
 
 func mergeInts(intervals [][]int) [][]int {
 	sort.Slice(intervals, func(i, j int) bool {
-		if intervals[i][0] <= intervals[j][0] {
+		if intervals[i][0] < intervals[j][0] {
 			return true
 		} else if intervals[i][0] > intervals[j][0] {
 			return false
@@ -66,7 +66,7 @@ func mergeInts(intervals [][]int) [][]int {
 	for i, j := 0, 1; i < len(intervals)-1 && j < len(intervals); {
 		//fmt.Println(i, j, len(intervals), len(intervals[j]), len(intervals[i]))
 		//fmt.Println(intervals)
-		if intervals[j][0] < intervals[i][1] {
+		if intervals[j][0] <=t  intervals[i][1] {
 			if intervals[j][1] > intervals[i][1] {
 				intervals[i][1] = intervals[j][1]
 				intervals[j] = nil
