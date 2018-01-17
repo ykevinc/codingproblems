@@ -29,11 +29,10 @@ func shoppingOffers(prices []int, specials [][]int, needs []int) int {
 }
 
 func shoppingOffersSub(choices []choice, k int, needs []int, uses []int, remain int, price int, min *int) {
-	if remain == 0 && (*min == -1 || *min > price) {
-		*min = price
-		return
-	}
-	if remain <= 0 || (*min != -1 && price > *min) {
+	if remain == 0 || (*min != -1 && price > *min)  {
+		if (*min == -1 || *min > price) {
+			*min = price
+		}
 		return
 	}
 	for i := k; i < len(choices); i++ {
@@ -46,7 +45,7 @@ func shoppingOffersSub(choices []choice, k int, needs []int, uses []int, remain 
 			}
 			shoppingOffersSub(choices, i, needs, uses, remain, price+choice.price, min)
 			for k, p := range choice.items {
-			t 	needs[k] += p
+				needs[k] += p
 				uses[k] -= p
 				remain += p
 			}
