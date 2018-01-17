@@ -18,7 +18,6 @@ func TestInsertionDeleteGetRandom(t *testing.T) {
 			[]int{1, 1, 1, 0},
 		},
 	}
-	// Shrink array
 	for _, table := range tables {
 		collection := Constructor()
 		for i := range table.c {
